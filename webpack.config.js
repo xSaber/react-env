@@ -2,9 +2,9 @@ const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: './app/index.html',
-  filename: 'index.html',
-  inject: 'body'
+    template: './app/index.html',
+    filename: 'index.html',
+    inject: 'body'
 });
 
 module.exports = {
@@ -14,17 +14,17 @@ module.exports = {
         filename: 'index_bundle.js'
     },
     module: {
-        loaders: [{
-                test: /\.js$/,
+        rules: [{
+            test: /\.jsx?$/,
+            exclude: /node_modules/,
+            use: {
                 loader: 'babel-loader',
-                exclude: /node_modules/
-            },
-            {
-                test: /\.jsx$/,
-                loader: 'babel-loader',
-                exclude: /node_modules/
+                options: {
+                    // Can be ceparated to .babelrc file
+                    presets : ['react', 'es2015', 'stage-0']
+                }
             }
-        ]
+        }]
     },
     plugins: [HtmlWebpackPluginConfig]
 }
